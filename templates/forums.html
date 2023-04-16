@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="subforum">
+            <h3>*Obs: Para participar do forum click sobre as três barras ao lado do nome Canada Brazil e faça o login</h3>
+            {% if forums %}
+                <div class="subforum-title">
+                    
+                    <h1>Temas em discursão</h1>
+                </div>
+
+                {% for forum in forums %}
+                    <div class="subforum-row">
+                        <div class="subforum-icon subforum-column center">
+                            <i class="fa fa-rocket"></i>
+                        </div>
+                        <div class="subforum-description subforum-column">
+                            <h4><a href="{{forum.get_url}}">{{forum.title}}</a></h4>
+                            <p>Descrição: {{forum.description}} </p>
+                        </div>
+                        <div class="subforum-stats subforum-column center">
+                            <span>{{forum.num_posts}} Posts</span>
+                        </div>
+                        <div class="subforum-info subforum-column">
+                            {% if forum.last_post %}
+                                <b><a href="{{forum.last_post.get_url}}">Última postagem</a></b> por <a href="">{{forum.last_post.user.fullname|title}}</a> 
+                                <br>em <small>{{forum.last_post.date|date}}</small>
+                            {% else %}
+                                <span>Não há postagens nessa categoria.</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <div class="subforum-title">
+                    <h1><i class="fa fa-frown-o"></i>&nbsp;Você ainda não tem postagens.</h1>
+                </div>
+            {% endif %}
+        </div>
+        <!--More-->
+        
+        
+        
+    </div>
+
+    <!-- Forum Info -->
+    <div class="forum-info">
+        <div class="chart">
+            Forum Canada Brazil - Status &nbsp;<i class="fa fa-bar-chart"></i>
+        </div>
+        <span><u>{{num_posts}}</u> Posts em <u>{{num_categories}}</u> Categorias por <u>{{num_users}}</u> Membros.</span><br>
+        {% if forums %}
+            <span>Última postagem: <b><a href="{{last_post.get_url}}">{{last_post.title}}</a></b> em {{last_post.date|date}} Por <a href="">{{last_post.user.fullname|title}}</a></span>.<br>
+            <span>Veja <a href="{% url 'latest_posts' %}">a última postagem</a> .</span><br>
+        {% endif %}
+    </div>
+
+    {% endblock content %}
