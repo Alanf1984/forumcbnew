@@ -1,0 +1,5 @@
+static:
+  - path: /static
+    directory: public
+    headers:
+      content-type: text/css
