@@ -15,6 +15,7 @@ django-resized==1.0.2
 django-taggit==3.1.0
 django-tinymce==3.6.1
 filelock==3.10.0
+gunicorn==20.1.0
 Pillow==9.4.0
 platformdirs==3.1.1
 psycopg2==2.9.6
