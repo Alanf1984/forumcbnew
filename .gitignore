@@ -1,3 +1,2 @@
-venv
+/venv
 secrets.env
-.idea
