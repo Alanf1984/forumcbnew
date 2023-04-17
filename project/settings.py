@@ -26,7 +26,7 @@ env = environ.Env(
 SECRET_KEY = ("KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ("DEBUG")
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ['*']
 
@@ -131,8 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR / 'static'),]
-MEDIA_ROOT  = BASE_DIR / 'media'
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR / 'static'),]
+else:
+    MEDIA_ROOT  = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
